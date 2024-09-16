@@ -69,36 +69,20 @@ window.onclick = function (event){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Supprimer des projets de la boite modale
 function deleteWork(id){
     fetch(`http://localhost:5678/api/works/` + id, {
         method: "DELETE",
         headers: {
-            'Authorization': getAuthorization()
+            'Accept': 'application/json',
+            'Authorization': getAuthorization(),
+            'Content-Type': 'application/json',
         },
     })
-    .then(() => {
-        alert("Projet supprimé")
+    .then(async () => {
+		alert("Projet supprimé")
+		closeGallery()
+		DisplayWorks(await getWorks(), 'gallery')
     }).catch((err) => console.log('Erreur:', err))
 }
 
@@ -110,6 +94,9 @@ function sendWorkData(data){
 			'Authorization': getAuthorization()
 		},
 		body: data,
+	}).then(async () => {
+		closeWork()
+		DisplayWorks(await getWorks(), 'gallery')
 	})
 }
 

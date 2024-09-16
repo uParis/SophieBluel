@@ -8,7 +8,7 @@ async function Init(){
 	document.querySelectorAll(".categoryTitle").forEach(category => category.addEventListener("click", event => filterWorksByCategory(event)))
 }
 async function AllWorks(){
-	DisplayWorks(await getWorks())
+	DisplayWorks(await getWorks(), 'gallery')
 }
 
 function DisplayWorks(data, baliseHTML, isModal = false){
@@ -37,5 +37,5 @@ async function filterWorksByCategory(event){
 	const id = Number(event.target.dataset.id)
 
 	const works = await getWorks()
-	DisplayWorks(works.filter(work => work.categoryId === id))
+	DisplayWorks(works.filter(work => work.categoryId === id), 'gallery')
 }
